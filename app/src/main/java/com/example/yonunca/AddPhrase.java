@@ -1,6 +1,7 @@
 package com.example.yonunca;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,9 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class AddPhrase extends AppCompatActivity {
 
@@ -65,17 +69,32 @@ public class AddPhrase extends AppCompatActivity {
                     .addOnFailureListener(e -> Toast.makeText(AddPhrase.this, "Error al agregar frase.", Toast.LENGTH_SHORT).show());
         }).addOnFailureListener(e -> Toast.makeText(AddPhrase.this, "Error al recuperar el último ID.", Toast.LENGTH_SHORT).show());
     }
-    // Clase para manejar los datos de frase
-    static class Phrase {
-        String author;
-        String phrase;
-        long ID;
 
-        Phrase(String author, String phrase, long ID) {
+    // Clase para manejar los datos de frase
+    public static class Phrase {
+        private String author;
+        private String phrase;
+        private long ID;
+
+        public Phrase(String author, String phrase, long ID) {
             this.author = author;
             this.phrase = phrase;
             this.ID = ID;
         }
+
+        public String getAuthor() {
+            return author;
+        }
+
+        public String getPhrase() {
+            return phrase;
+        }
+
+        public long getID() {
+            return ID;
+        }
     }
+
+
 }
 

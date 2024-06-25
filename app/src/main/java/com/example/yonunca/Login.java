@@ -66,7 +66,6 @@ public class Login extends Activity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.putExtra("email", currentUser.getEmail());
             startActivity(intent);
-            finish();
         }
     }
 

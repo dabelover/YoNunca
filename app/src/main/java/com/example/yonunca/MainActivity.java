@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
@@ -19,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
     // Array inicial de frases
     private List<String> phrases = new ArrayList<>();
     private HashSet<String> phrasesSet = new HashSet<>(phrases);
-
+    private Button btnLogout; // Botón para cerrar sesión
+    private FirebaseAuth mAuth; // Instancia de FirebaseAuth
     // Variables para los componentes de la UI
     private TextView tvPhrase;
     private TextView tvAuthor; // TextView para mostrar el autor
@@ -36,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         // Inicializar Firebase Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        // Inicializar Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
         // Inicializar los componentes de la UI
         tvPhrase = findViewById(R.id.tvPhrase);
         tvAuthor = findViewById(R.id.tvAuthor); // Inicializar el TextView del autor
@@ -49,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         // Listener para el botón de actualizar frases
         btnUpdatePhrases.setOnClickListener(v -> updatePhrases(db));
 
+        // Inicializar el botón de salir
+        btnLogout = findViewById(R.id.btnLogout);
+
         // Listener para el botón de añadir frase
         btnAddPhrase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddPhrase.class);
                 startActivity(intent);
             }
+        });
+
+        btnLogout.setOnClickListener(v -> {
+            mAuth.signOut(); // Cerrar sesión en Firebase
+            goToLoginScreen(); // Método para ir a la pantalla de login
         });
     }
 
@@ -75,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void goToLoginScreen() {
+        Intent intent = new Intent(this, Login.class); // Asumiendo que tienes una LoginActivity para el login
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Limpia el stack de actividades
+        startActivity(intent);
+        finish(); // Finaliza MainActivity
+    }
+
     // Método para actualizar frases desde Firestore
     private void updatePhrases(FirebaseFirestore db) {
         db.collection("Phrases").get().addOnCompleteListener(task -> {
@@ -88,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                         String cleanPhrase = phrase.replaceAll("^[0-9]+\\.\\s*", "");
                         String phraseWithAuthor = author + "//" + cleanPhrase;
                         newPhrases.add(phraseWithAuthor);
+                        System.out.println("Frase añadida:  " + phraseWithAuthor);
                     }
                 }
                 addNewPhrases(newPhrases);
@@ -107,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         phrases.addAll(phrasesToAdd);
+        Toast.makeText(MainActivity.this, "Frases añadidas", Toast.LENGTH_SHORT).show();
     }
 }
 
