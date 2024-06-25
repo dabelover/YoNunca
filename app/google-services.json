@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1069867738125",
+    "project_id": "yonunca-1e6a6",
+    "storage_bucket": "yonunca-1e6a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069867738125:android:0f2221a16c7d6c9729a144",
+        "android_client_info": {
+          "package_name": "com.example.yonunca"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiDURyBoKmgIaZJ2cfVTuI3TpWIra55tQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

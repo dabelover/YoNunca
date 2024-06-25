@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- Texto de la frase de "Yo nunca" -->
+    <TextView
+        android:id="@+id/tvPhrase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yo nunca he..."
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"/>
+
+    <!-- TextView para el autor de la frase -->
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Autor: Desconocido"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Botón para obtener una nueva frase -->
+    <Button
+        android:id="@+id/btnNewPhrase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Nueva Frase"
+        android:layout_marginTop="40dp"/>
+
+    <!-- Botón para actualizar la base de datos de frases -->
+    <Button
+        android:id="@+id/btnUpdatePhrases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Actualizar Frases"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnAddPhrase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir Frase"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
+
